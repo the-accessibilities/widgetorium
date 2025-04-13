@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Widget Emporium</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header, footer {
+      background-color: #222;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+    main {
+      padding: 2rem;
+    }
+    .product-card {
+      background: white;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .button-div {
+      background-color: #007BFF;
+      color: white;
+      padding: 0.5rem 1rem;
+      display: inline-block;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .hidden-message {
+      color: red;
+      display: none;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    nav a {
+      color: white;
+      margin: 0 1rem;
+      text-decoration: none;
+    }
+    .icon-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    .icon-button svg {
+      width: 24px;
+      height: 24px;
+      fill: #333;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>The Widget Emporium</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Products</a>
+      <a href="#">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Best Selling Widgets</h2>
+
+    <!-- Decorative image missing alt text -->
+    <img src="https://via.placeholder.com/800x200">
+
+    <!-- Improper use of div as button -->
+    <div class="product-card">
+      <h3>Widget 3000</h3>
+      <img src="https://via.placeholder.com/300" alt="">
+      <p>The latest in widget innovation.</p>
+      <div class="button-div" onclick="alert('Added to cart!')">Add to Cart</div>
+
+      <!-- Icon-only button with no label -->
+      <button class="icon-button">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 6h18v2H3V6zm2 3h14v12H5V9zm3 2v8h2v-8H8zm4 0v8h2v-8h-2zm4 0v8h2v-8h-2z"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Input without label -->
+    <form>
+      <p>Subscribe to our newsletter</p>
+      <input type="email" placeholder="Email address">
+      <button type="submit">Subscribe</button>
+    </form>
+
+    <!-- Modal-like element not announced -->
+    <button onclick="document.getElementById('error-msg').style.display='block'">Trigger Error</button>
+    <div id="error-msg" class="hidden-message">Something went wrong with your request.</div>
+
+    <!-- Broken heading hierarchy -->
+    <h4>More Widgets</h4>
+    <p>Coming soon!</p>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 The Widget Emporium</p>
+  </footer>
+
+  <script>
+    // Fake dynamic update without ARIA live region
+    setTimeout(() => {
+      const notif = document.createElement('div');
+      notif.textContent = '🔥 Hot new widget just arrived!';
+      document.querySelector('main').appendChild(notif);
+    }, 4000);
+  </script>
+</body>
+</html>
