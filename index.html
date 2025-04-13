@@ -4,78 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Widget Emporium</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f4f4f4;
-      color: #333;
-    }
-    header, footer {
-      background-color: #222;
-      color: white;
-      text-align: center;
-      padding: 1rem;
-    }
-    main {
-      padding: 2rem;
-    }
-    .product-card {
-      background: white;
-      border-radius: 8px;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .button-div {
-      background-color: #007BFF;
-      color: white;
-      padding: 0.5rem 1rem;
-      display: inline-block;
-      cursor: pointer;
-      border-radius: 4px;
-    }
-    .hidden-message {
-      color: red;
-      display: none;
-    }
-    img {
-      max-width: 100%;
-      height: auto;
-    }
-    nav a {
-      color: white;
-      margin: 0 1rem;
-      text-decoration: none;
-    }
-    .icon-button {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0.5rem;
-    }
-    .icon-button svg {
-      width: 24px;
-      height: 24px;
-      fill: #333;
-    }
-  </style>
+<link rel="stylesheet" href="style.css">
+  
 </head>
 <body>
-  <header>
-    <h1>The Widget Emporium</h1>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#">Products</a>
-      <a href="#">About</a>
-    </nav>
-  </header>
+  <div id="header"></div>
+    
 
   <main>
     <h2>Best Selling Widgets</h2>
 
     <!-- Decorative image missing alt text -->
-    <img src="https://via.placeholder.com/800x200">
+    <img src="widget_3000.png" alt="Widget 3000 product image">
 
     <!-- Improper use of div as button -->
     <div class="product-card">
@@ -108,11 +48,19 @@
     <p>Coming soon!</p>
   </main>
 
-  <footer>
-    <p>&copy; 2025 The Widget Emporium</p>
-  </footer>
-
+  <div id="footer"></div>
   <script>
+  
+  
+  fetch('header.html')
+    .then(res => res.text())
+    .then(data => document.getElementById('header').innerHTML = data);
+
+  fetch('footer.html')
+    .then(res => res.text())
+    .then(data => document.getElementById('footer').innerHTML = data);
+
+  
     // Fake dynamic update without ARIA live region
     setTimeout(() => {
       const notif = document.createElement('div');
