@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Widgetorium Products</title>
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch("header.html")
+        .then((res) => res.text())
+        .then((data) => (document.getElementById("header").innerHTML = data));
+
+      fetch("footer.html")
+        .then((res) => res.text())
+        .then((data) => (document.getElementById("footer").innerHTML = data));
+    });
+  </script>
+</head>
+<body>
+  <div id="header"></div>
+  <main>
+    <h1 class="page-title">Our Widgets</h1>
+    <div class="products-grid">
+      <script>
+        const products = Array.from({ length: 30 }, (_, i) => ({
+          name: `Widget ${1000 + i}`,
+          price: `$${(10 + Math.random() * 90).toFixed(2)}`,
+          rating: Math.floor(Math.random() * 5) + 1,
+          description: "An innovative widget for your daily needs."
+        }));
+
+        const productsPerPage = 10;
+        let currentPage = 1;
+
+        function renderProducts() {
+          const start = (currentPage - 1) * productsPerPage;
+          const end = start + productsPerPage;
+          const productContainer = document.querySelector(".products-grid");
+          productContainer.innerHTML = products.slice(start, end).map(p => `
+            <div class="product-card">
+              <img src="placeHolderWidget.png" alt="${p.name}" />
+              <h2>${p.name}</h2>
+              <p class="price">${p.price}</p>
+              <p class="stars">${'★'.repeat(p.rating)}${'☆'.repeat(5 - p.rating)}</p>
+              <p class="description">${p.description}</p>
+              <button class="wishlist-btn">Add to Wishlist</button>
+              <button class="cart-btn">Add to Cart</button>
+            </div>
+          `).join("");
+
+          document.getElementById("pagination").innerHTML = renderPagination();
+        }
+
+        function renderPagination() {
+          const pages = Math.ceil(products.length / productsPerPage);
+          return Array.from({ length: pages }, (_, i) => `
+            <button class="page-btn" onclick="changePage(${i + 1})">${i + 1}</button>
+          `).join("");
+        }
+
+        function changePage(page) {
+          currentPage = page;
+          renderProducts();
+        }
+
+        window.onload = renderProducts;
+      </script>
+    </div>
+    <div id="pagination" class="pagination"></div>
+  </main>
+  <div id="footer"></div>
+</body>
+</html>
