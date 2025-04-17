@@ -29,10 +29,13 @@
           tab.setAttribute('tabindex', '0');
 
           document.querySelectorAll('[role="tabpanel"]').forEach(panel => {
-            panel.hidden = true;
+            panel.style.opacity = '0';
+            
           });
 
-          document.getElementById(selectedPanel).hidden = false;
+          const activePanel = document.getElementById(selectedPanel);
+          activePanel.style.opacity = '1';
+          
         });
       });
     });
@@ -55,10 +58,17 @@
       color: white;
     }
     [role="tabpanel"] {
-      border: 1px solid #ccc;
+      border: 2px solid #ccc;
       padding: 1rem;
       border-radius: 5px;
       background: #fff;
+      transition: opacity 0.3s ease;
+      opacity: 0;
+      max-width: 700px;
+      margin-top: 1rem;
+    }
+    [role="tabpanel"][aria-hidden="false"] {
+      opacity: 1;
     }
   </style>
 </head>
@@ -74,14 +84,14 @@
       <button role="tab" id="tab3" aria-controls="panel3" aria-selected="false" tabindex="-1">About Anthony Lawlor, Indentured Feline Servant</button>
     </div>
 
-    <div id="panel1" role="tabpanel" aria-labelledby="tab1">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eu nisi a est ultricies pulvinar non nec urna.</p>
+    <div id="panel1" role="tabpanel" aria-labelledby="tab1" >
+      <Mr. Kitty is the business kitty in charge of stuff and things. p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eu nisi a est ultricies pulvinar non nec urna.</p>
     </div>
-    <div id="panel2" role="tabpanel" aria-labelledby="tab2" hidden>
-      <p>Phasellus bibendum convallis leo, nec tincidunt sem venenatis et. Curabitur at rhoncus lorem.</p>
+    <div id="panel2" role="tabpanel" aria-labelledby="tab2" >
+      <p>Mr. Guy does puter real good. Phasellus bibendum convallis leo, nec tincidunt sem venenatis et. Curabitur at rhoncus lorem.</p>
     </div>
-    <div id="panel3" role="tabpanel" aria-labelledby="tab3" hidden>
-      <p>Nullam luctus, massa eget commodo tincidunt, ligula sapien commodo eros, sed fermentum lorem velit nec purus.</p>
+    <div id="panel3" role="tabpanel" aria-labelledby="tab3" >
+      <p>Anthony is an unpaid and overworked indentured feline servant who responds to the every whim and fancy of his feline overlords. Nullam luctus, massa eget commodo tincidunt, ligula sapien commodo eros, sed fermentum lorem velit nec purus.</p>
     </div>
   </main>
 
