@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us - Widgetorium</title>
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch("header.html")
+        .then(res => res.text())
+        .then(data => document.getElementById("header").innerHTML = data);
+
+      fetch("footer.html")
+        .then(res => res.text())
+        .then(data => document.getElementById("footer").innerHTML = data);
+
+      const tabs = document.querySelectorAll('[role="tab"]');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const selectedPanel = tab.getAttribute('aria-controls');
+
+          tabs.forEach(t => {
+            t.setAttribute('aria-selected', 'false');
+            t.setAttribute('tabindex', '-1');
+          });
+
+          tab.setAttribute('aria-selected', 'true');
+          tab.setAttribute('tabindex', '0');
+
+          document.querySelectorAll('[role="tabpanel"]').forEach(panel => {
+            panel.hidden = true;
+          });
+
+          document.getElementById(selectedPanel).hidden = false;
+        });
+      });
+    });
+  </script>
+  <style>
+    .tablist {
+      display: flex;
+      gap: 1rem;
+      margin: 2rem 0 1rem;
+    }
+    [role="tab"] {
+      padding: 0.5rem 1rem;
+      background: #eee;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    [role="tab"][aria-selected="true"] {
+      background: #007BFF;
+      color: white;
+    }
+    [role="tabpanel"] {
+      border: 1px solid #ccc;
+      padding: 1rem;
+      border-radius: 5px;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+
+  <main>
+    <h1>About Us</h1>
+
+    <div role="tablist" aria-label="Team Tabs" class="tablist">
+      <button role="tab" id="tab1" aria-controls="panel1" aria-selected="true" tabindex="0">About Mr. Kitty, CEO</button>
+      <button role="tab" id="tab2" aria-controls="panel2" aria-selected="false" tabindex="-1">About Mr. Guy, CTO</button>
+      <button role="tab" id="tab3" aria-controls="panel3" aria-selected="false" tabindex="-1">About Anthony Lawlor, Indentured Feline Servant</button>
+    </div>
+
+    <div id="panel1" role="tabpanel" aria-labelledby="tab1">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eu nisi a est ultricies pulvinar non nec urna.</p>
+    </div>
+    <div id="panel2" role="tabpanel" aria-labelledby="tab2" hidden>
+      <p>Phasellus bibendum convallis leo, nec tincidunt sem venenatis et. Curabitur at rhoncus lorem.</p>
+    </div>
+    <div id="panel3" role="tabpanel" aria-labelledby="tab3" hidden>
+      <p>Nullam luctus, massa eget commodo tincidunt, ligula sapien commodo eros, sed fermentum lorem velit nec purus.</p>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+</body>
+</html>
