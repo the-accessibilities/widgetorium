@@ -4,18 +4,32 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Widget Emporium</title>
-<link rel="stylesheet" href="style.css">
-  
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      fetch('header.html').then(res => res.text()).then(data => {
+        document.getElementById('header').innerHTML = data;
+      });
+      fetch('footer.html').then(res => res.text()).then(data => {
+        document.getElementById('footer').innerHTML = data;
+      });
+    });
+
+    function handleNewsletterSignup(event) {
+      event.preventDefault();
+      const statusEl = document.getElementById('newsletter-status');
+      statusEl.textContent = 'Thank you for subscribing to our newsletter!';
+    }
+  </script>
 </head>
 <body>
   <div id="header"></div>
-    
 
   <main>
     <h2>Best Selling Widgets</h2>
 
     <!-- Decorative image missing alt text -->
-    <img src="widget_3000.png" alt="Widget 3000 product image">
+    <img src="https://via.placeholder.com/800x200">
 
     <!-- Improper use of div as button -->
     <div class="product-card">
@@ -33,11 +47,14 @@
     </div>
 
     <!-- Input without label -->
-    <form>
+    <form onsubmit="handleNewsletterSignup(event)">
       <p>Subscribe to our newsletter</p>
-      <input type="email" placeholder="Email address">
+      <input type="email" placeholder="Email address" required>
       <button type="submit">Subscribe</button>
     </form>
+
+    <!-- Invisible ARIA live region -->
+    <div id="newsletter-status" aria-live="polite" style="position:absolute; left:-9999px; height:1px; width:1px; overflow:hidden;"></div>
 
     <!-- Modal-like element not announced -->
     <button onclick="document.getElementById('error-msg').style.display='block'">Trigger Error</button>
@@ -49,24 +66,5 @@
   </main>
 
   <div id="footer"></div>
-  <script>
-  
-  
-  fetch('header.html')
-    .then(res => res.text())
-    .then(data => document.getElementById('header').innerHTML = data);
-
-  fetch('footer.html')
-    .then(res => res.text())
-    .then(data => document.getElementById('footer').innerHTML = data);
-
-  
-    // Fake dynamic update without ARIA live region
-    setTimeout(() => {
-      const notif = document.createElement('div');
-      notif.textContent = '🔥 Hot new widget just arrived!';
-      document.querySelector('main').appendChild(notif);
-    }, 4000);
-  </script>
 </body>
 </html>
