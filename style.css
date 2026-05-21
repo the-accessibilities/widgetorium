@@ -1,116 +1,210 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f4f4f4;
+    color: #333;
+} /* closes body */
 
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f4f4f4;
-      color: #333;
-    }
-    header, footer {
-      background-color: #222;
-      color: white;
-      text-align: center;
-      padding: 1rem;
-    }
-    main {
-      padding: 2rem;
-    }
-    .product-card {
-      background: white;
-      border-radius: 8px;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .button-div {
-      background-color: #007BFF;
-      color: white;
-      padding: 0.5rem 1rem;
-      display: inline-block;
-      cursor: pointer;
-      border-radius: 4px;
-    }
-    .hidden-message {
-      color: red;
-      display: none;
-    }
-    img {
-      max-width: 100%;
-      height: auto;
-    }
-    nav a {
-      color: white;
-      margin: 0 1rem;
-      text-decoration: none;
-    }
-    .icon-button {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0.5rem;
-    }
-    .icon-button svg {
-      width: 24px;
-      height: 24px;
-      fill: #333;
-    }
-  
-  /* Grid layout for the products */
+header,
+footer {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+} /* closes header/footer */
+
+main {
+    padding: 2rem;
+} /* closes main */
+
+.product-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+} /* closes product-card */
+
+.button-div {
+    background-color: #007BFF;
+    color: white;
+    padding: 0.5rem 1rem;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 4px;
+} /* closes button-div */
+
+.hidden-message {
+    color: red;
+    display: none;
+} /* closes hidden-message */
+
+img {
+    max-width: 100%;
+    height: auto;
+} /* closes img */
+
+nav a {
+    color: white;
+    margin: 0 1rem;
+    text-decoration: none;
+} /* closes nav a */
+
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+} /* closes icon-button */
+
+.icon-button svg {
+    width: 24px;
+    height: 24px;
+    fill: #333;
+} /* closes icon-button svg */
+
+
+
+/* ====================================================== */
+/* PRODUCTS GRID */
+/* ====================================================== */
+
 .products-grid {
     display: grid;
-  grid-template-columns: repeat(5, 1fr); /* force 5 columns */
-  gap: 1.5rem;
-  padding: 2rem;}
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+    padding: 2rem;
+} /* closes products-grid */
 
-/* Product card styling */
+
+
 .product-card {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 1rem;
-  background-color: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: transform 0.2s ease;
-}
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 1rem;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s ease;
+} /* closes product-card */
 
 .product-card:hover {
-  transform: scale(1.02);
-}
+    transform: scale(1.02);
+} /* closes product-card:hover */
 
-/* Product image smaller */
 .product-card img {
-  max-width: 100%;
-  width: 25%;
-  height: auto;
-  margin-bottom: 1rem;
-}
+    max-width: 100%;
+    width: 25%;
+    height: auto;
+    margin-bottom: 1rem;
+} /* closes product-card img */
 
-/* Product title and details */
 .product-card h3 {
-  font-size: 1.1rem;
-  margin: 0.5rem 0;
-}
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+} /* closes product-card h3 */
 
 .product-card p {
-  font-size: 0.9rem;
-  text-align: center;
-  margin: 0.3rem 0;
-}
+    font-size: 0.9rem;
+    text-align: center;
+    margin: 0.3rem 0;
+} /* closes product-card p */
 
-/* Buttons */
 .product-card button {
-  margin: 0.2rem;
-  padding: 0.4rem 0.8rem;
-  font-size: 0.85rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  background-color: #1976d2;
-  color: white;
-  transition: background-color 0.3s;
-}
+    margin: 0.2rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #1976d2;
+    color: white;
+    transition: background-color 0.3s;
+} /* closes product-card button */
 
 .product-card button:hover {
-  background-color: #125ea3;
-}
+    background-color: #125ea3;
+} /* closes product-card button:hover */
+
+
+
+/* ====================================================== */
+/* SCREEN READER BUG LAB */
+/* ====================================================== */
+
+.sr-bug-lab {
+    max-width: 1100px;
+    margin: 0 auto;
+    line-height: 1.6;
+} /* closes sr-bug-lab */
+
+.sr-bug-lab h1,
+.sr-bug-lab h2,
+.sr-bug-lab h3 {
+    margin-top: 2rem;
+} /* closes sr-bug-lab headings */
+
+.sr-bug-lab section {
+    border: 2px solid #ccc;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    background: white;
+} /* closes sr-bug-lab section */
+
+.sr-bug-lab .demo-area {
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 1px dashed #888;
+} /* closes demo-area */
+
+.sr-bug-lab .fake-button,
+.sr-bug-lab .real-button {
+    display: inline-block;
+    padding: 0.7rem 1rem;
+    border: 1px solid black;
+    cursor: pointer;
+    user-select: none;
+    margin-bottom: 1rem;
+    background: white;
+    color: black;
+} /* closes button styles */
+
+.sr-bug-lab .panel {
+    padding: 1rem;
+    border-left: 4px solid #444;
+    background: #f5f5f5;
+    margin-top: 0.5rem;
+} /* closes panel */
+
+.sr-bug-lab .hidden {
+    display: none;
+} /* closes hidden */
+
+.sr-bug-lab .warning {
+    color: darkred;
+    font-weight: bold;
+} /* closes warning */
+
+.sr-bug-lab .overlay-container {
+    position: relative;
+    display: inline-block;
+} /* closes overlay-container */
+
+.sr-bug-lab .invisible-overlay {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    z-index: 2;
+} /* closes invisible-overlay */
+
+.sr-bug-lab .pointer-events-none {
+    pointer-events: none;
+} /* closes pointer-events-none */
+
+.sr-bug-lab *:focus {
+    outline: 3px solid red;
+    outline-offset: 2px;
+} /* closes focus styles */

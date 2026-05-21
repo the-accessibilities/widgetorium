@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8" />
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+/>
+
+<title>
+    The Widget Emporium
+</title>
+
+<link
+    rel="stylesheet"
+    href="style.css"
+/>
+
+<script>
+
+window.addEventListener("DOMContentLoaded", () => {
+
+    fetch("header.html")
+        .then(res => res.text())
+        .then(data => {
+
+            document.getElementById("header").innerHTML =
+                data;
+
+        }); // closes header fetch
+
+    fetch("footer.html")
+        .then(res => res.text())
+        .then(data => {
+
+            document.getElementById("footer").innerHTML =
+                data;
+
+        }); // closes footer fetch
+
+}); // closes DOMContentLoaded listener
+
+
+
+function handleNewsletterSignup(event) {
+
+    event.preventDefault();
+
+    const statusEl =
+        document.getElementById("newsletter-status");
+
+    statusEl.textContent =
+        "Thank you for subscribing to our newsletter!";
+
+} // closes handleNewsletterSignup
+
+</script>
+
+</head>
+
+<body>
+
+<div id="header"></div>
+
+<main class="sr-bug-lab">
+
+<h1>
+    Screen Reader Disclosure Button Failure Lab
+</h1>
+
+<p>
+    This page demonstrates several real-world accessibility bugs involving
+    disclosure buttons, screen readers, keyboard interaction,
+    and accessibility APIs.
+</p>
+
+<p>
+    Each section contains:
+</p>
+
+<ul>
+    <li>A broken implementation</li>
+    <li>An explanation of why it fails</li>
+    <li>A live demo</li>
+    <li>Inspectable code behavior for DevTools analysis</li>
+</ul>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- GOOD EXAMPLE -->
+<!-- ====================================================== -->
+
+<section>
+
+<h2>
+    1. Correct Native Button Implementation
+</h2>
+
+<p>
+    This is the correct implementation using a native
+    <code>&lt;button&gt;</code>.
+</p>
+
+<div class="demo-area">
+
+<button
+    class="real-button"
+    id="goodButton"
+    aria-expanded="false"
+    aria-controls="goodPanel"
+>
+    About
+</button>
+
+<div
+    id="goodPanel"
+    class="panel hidden"
+>
+    This disclosure uses native semantics and works properly
+    with keyboard, screen readers, accessibility APIs,
+    and synthesized click events.
+</div>
+
+</div>
+
+<div class="code-note">
+
+<strong>
+    Why this works:
+</strong>
+
+<ul>
+    <li>Native button semantics</li>
+    <li>Automatic Enter/Space handling</li>
+    <li>Accessible activation events</li>
+    <li>No custom keyboard traps</li>
+</ul>
+
+</div>
+
+</section>
+
+<!-- ====================================================== -->
+<!-- BUG 1 -->
+<!-- ====================================================== -->
+
+<section>
+
+<h2>
+    2. Fake Button Using Only Keydown
+</h2>
+
+<p class="warning">
+    Expected failure:
+    Works without screen reader.
+    May fail in NVDA browse mode or VoiceOver interaction differences.
+</p>
+
+<div class="demo-area">
+
+<div
+    role="button"
+    tabindex="0"
+    class="fake-button"
+    id="keydownBugButton"
+    aria-expanded="false"
+    aria-controls="keydownBugPanel"
+>
+    About
+</div>
+
+<div
+    id="keydownBugPanel"
+    class="panel hidden"
+>
+    This disclosure relies entirely on keydown events.
+    Screen readers may intercept Enter or Space before
+    the page receives it.
+</div>
+
+</div>
+
+</section>
+
+<!-- ====================================================== -->
+<!-- BUG 2 -->
+<!-- ====================================================== -->
+
+<section>
+
+<h2>
+    3. Deprecated Keypress Event
+</h2>
+
+<p class="warning">
+    Expected failure:
+    Inconsistent behavior across browsers and screen readers.
+</p>
+
+<div class="demo-area">
+
+<div
+    role="button"
+    tabindex="0"
+    class="fake-button"
+    id="keypressBugButton"
+    aria-expanded="false"
+    aria-controls="keypressBugPanel"
+>
+    About
+</div>
+
+<div
+    id="keypressBugPanel"
+    class="panel hidden"
+>
+    This disclosure uses the deprecated keypress event.
+    Some browser and screen reader combinations never fire it.
+</div>
+
+</div>
+
+</section>
+
+<!-- ====================================================== -->
+<!-- BUG 3 -->
+<!-- ====================================================== -->
+
+<section>
+
+<h2>
+    4. Native Button Broken With preventDefault()
+</h2>
+
+<p class="warning">
+    Expected failure:
+    Native button semantics sabotaged by JavaScript.
+</p>
+
+<div class="demo-area">
+
+<button
+    class="real-button"
+    id="preventDefaultButton"
+    aria-expanded="false"
+    aria-controls="preventDefaultPanel"
+>
+    About
+</button>
+
+<div
+    id="preventDefaultPanel"
+    class="panel hidden"
+>
+    This button SHOULD work because it is native.
+    However, JavaScript blocks default activation behavior.
+</div>
+
+</div>
+
+</section>
+
+<!-- ====================================================== -->
+<!-- BUG 4 -->
+<!-- ====================================================== -->
+
+<section>
+
+<h2>
+    5. Invisible Overlay Stealing Interaction
+</h2>
+
+<p class="warning">
+    Expected failure:
+    Interaction inconsistencies caused by hidden overlay interception.
+</p>
+
+<div class="demo-area">
+
+<div class="overlay-container">
+
+<button
+    class="real-button"
+    id="overlayButton"
+    aria-expanded="false"
+    aria-controls="overlayPanel"
+>
+    About
+</button>
+
+<div
+    class="invisible-overlay"
+    id="overlayTrap"
+></div>
+
+</div>
+
+<div
+    id="overlayPanel"
+    class="panel hidden"
+>
+    An invisible positioned layer intercepts interaction.
+    This often happens accidentally in enterprise UI frameworks.
+</div>
+
+</div>
+
+</section>
+
+<!-- ====================================================== -->
+<!-- BUG 5 -->
+<!-- ====================================================== -->
+
+<section>
+
+<h2>
+    6. Pointer Events Disabled
+</h2>
+
+<p class="warning">
+    Expected failure:
+    Keyboard may work while screen reader activation fails.
+</p>
+
+<div class="demo-area">
+
+<button
+    class="real-button pointer-events-none"
+    id="pointerEventsButton"
+    aria-expanded="false"
+    aria-controls="pointerEventsPanel"
+>
+    About
+</button>
+
+<div
+    id="pointerEventsPanel"
+    class="panel hidden"
+>
+    pointer-events:none disables click interaction.
+    Some screen readers synthesize click events which now fail.
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+<script>
+
+function toggleDisclosure(button, panel) {
+
+    const expanded =
+        button.getAttribute("aria-expanded") === "true";
+
+    button.setAttribute(
+        "aria-expanded",
+        (!expanded).toString()
+    );
+
+    panel.classList.toggle("hidden");
+
+} // closes toggleDisclosure
+
+
+
+const goodButton =
+    document.getElementById("goodButton");
+
+const goodPanel =
+    document.getElementById("goodPanel");
+
+goodButton.addEventListener("click", () => {
+
+    toggleDisclosure(goodButton, goodPanel);
+
+}); // closes goodButton listener
+
+
+
+const keydownBugButton =
+    document.getElementById("keydownBugButton");
+
+const keydownBugPanel =
+    document.getElementById("keydownBugPanel");
+
+keydownBugButton.addEventListener("keydown", (event) => {
+
+    if (event.key === "Enter") {
+
+        toggleDisclosure(
+            keydownBugButton,
+            keydownBugPanel
+        );
+
+    } // closes Enter check
+
+}); // closes keydownBugButton listener
+
+
+
+const keypressBugButton =
+    document.getElementById("keypressBugButton");
+
+const keypressBugPanel =
+    document.getElementById("keypressBugPanel");
+
+keypressBugButton.addEventListener("keypress", (event) => {
+
+    if (event.key === "Enter") {
+
+        toggleDisclosure(
+            keypressBugButton,
+            keypressBugPanel
+        );
+
+    } // closes Enter check
+
+}); // closes keypressBugButton listener
+
+
+
+const preventDefaultButton =
+    document.getElementById("preventDefaultButton");
+
+const preventDefaultPanel =
+    document.getElementById("preventDefaultPanel");
+
+preventDefaultButton.addEventListener("keydown", (event) => {
+
+    event.preventDefault();
+
+    if (event.key === "Enter") {
+
+        toggleDisclosure(
+            preventDefaultButton,
+            preventDefaultPanel
+        );
+
+    } // closes Enter check
+
+}); // closes preventDefaultButton listener
+
+
+
+const overlayButton =
+    document.getElementById("overlayButton");
+
+const overlayPanel =
+    document.getElementById("overlayPanel");
+
+overlayButton.addEventListener("click", () => {
+
+    toggleDisclosure(
+        overlayButton,
+        overlayPanel
+    );
+
+}); // closes overlayButton listener
+
+
+
+const overlayTrap =
+    document.getElementById("overlayTrap");
+
+overlayTrap.addEventListener("click", (event) => {
+
+    event.stopPropagation();
+
+}); // closes overlayTrap listener
+
+
+
+const pointerEventsButton =
+    document.getElementById("pointerEventsButton");
+
+const pointerEventsPanel =
+    document.getElementById("pointerEventsPanel");
+
+pointerEventsButton.addEventListener("keydown", (event) => {
+
+    if (event.key === "Enter") {
+
+        toggleDisclosure(
+            pointerEventsButton,
+            pointerEventsPanel
+        );
+
+    } // closes Enter check
+
+}); // closes pointerEventsButton listener
+
+</script>
+
+<div id="footer"></div>
+
+</body>
+</html>
